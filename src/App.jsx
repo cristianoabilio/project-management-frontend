@@ -1,21 +1,18 @@
 import { Link, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Welcome from "./compoments/Welcome";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import NavBar from "./compoments/NavBar";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 function App() {
   return (
     <Router>
-      <nav>
-        <Link to="/">Home</Link> {" | "}
-        <Link to="/about">About</Link> {" | "}
-        <Link to="/contact">Contact</Link>
-      </nav>
+      <NavBar />
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   )
