@@ -5,6 +5,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Projects from "./pages/Projects";
+import AddProject from "./pages/AddProject";
+import EditProject from "./pages/EditProject";
+import Tasks from "./pages/Tasks";
+import AddTask from "./pages/AddTask";
+import EditTask from "./pages/EditTask";
 
 function Layout() {
   const location = useLocation();
@@ -27,6 +33,52 @@ function Layout() {
             element={
               <ProtectedRoutes>
                 <Dashboard />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route path="/projects"
+            element={
+              <ProtectedRoutes>
+                <Projects />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route path="/projects/add"
+            element={
+              <ProtectedRoutes>
+                <AddProject />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route path="/projects/edit/:id"
+            element={
+              <ProtectedRoutes>
+                <EditProject />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route path="/tasks"
+            element={
+              <ProtectedRoutes>
+                <Tasks />
+              </ProtectedRoutes>
+            }
+          />
+          <Route path="/task/add"
+            element={
+              <ProtectedRoutes>
+                <AddTask />
+              </ProtectedRoutes>
+            }
+          />
+          <Route path="/task/edit/:id"
+            element={
+              <ProtectedRoutes>
+                <EditTask />
               </ProtectedRoutes>
             }
           />
