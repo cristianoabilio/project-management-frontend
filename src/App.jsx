@@ -11,6 +11,7 @@ import EditProject from "./pages/EditProject";
 import Tasks from "./pages/Tasks";
 import AddTask from "./pages/AddTask";
 import EditTask from "./pages/EditTask";
+import ProjectDetails from "./pages/ProjectDetails";
 
 function Layout() {
   const location = useLocation();
@@ -57,6 +58,14 @@ function Layout() {
             element={
               <ProtectedRoutes>
                 <EditProject />
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route path="/projects/details/:id"
+            element={
+              <ProtectedRoutes>
+                <ProjectDetails />
               </ProtectedRoutes>
             }
           />
