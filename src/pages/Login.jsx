@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../axios";
 
 export default function Login() {
@@ -13,8 +14,6 @@ export default function Login() {
         e.preventDefault();
         setLoading(true);
         setMessage('');
-        console.log("Email : ", email);
-        console.log("Password : ", password);
 
         try {
             const response = await api.post('/login', {
@@ -25,16 +24,20 @@ export default function Login() {
             const token = response.data.data.token;
             localStorage.setItem('token', token);
 
-            setMessage(response.data.message);
+            const user = response.data.data.name;
+            console.log("user login", user);
+            localStorage.setItem('user', user);
+
+            toast.success(response.data.message);
 
             navigate('/dashboard');
         } catch (error) {
             console.log('error : ', error);
 
-            setMessage('Something went wrong');
+            toast.error('Something went wrong');
 
             if (error.response && error.response.data.message) {
-                setMessage(error.response.data.message);
+                toast.error(error.response.data.message);
             }
         } finally {
             setLoading(false);
@@ -64,19 +67,9 @@ export default function Login() {
                     </svg>
                     <input className="w-full outline-none bg-transparent py-2.5" type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password" required />
                 </div>
-                {/* <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-1">
-                        <input id="checkbox" type="checkbox" />
-                        <label htmlFor="checkbox">Remember me</label>
-                    </div>
-                    <a className="text-blue-600 underline" href="#">Forgot Password</a>
-                </div> */}
                 <button type="submit" className="w-full mb-3 bg-indigo-500 hover:bg-indigo-600/90 transition py-2.5 rounded text-white font-medium">
                     {loading ? "Submitting..." : "Log in"}
                 </button>
-                {message && (
-                    <p>{message}</p>
-                )}
                 <p className="text-center mt-4">Don't have an account? <Link to="/register" className="text-blue-500 underline">Signup</Link></p>
             </form>
         </div>
