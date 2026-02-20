@@ -57,7 +57,7 @@ export default function EditProject() {
             navigate('/projects');
         } catch (error) {
             console.log("Error saving project.", error);
-            alert("failed to add project");
+            toast.error("error to updated project");
         } finally {
             setLoading(false);
         }

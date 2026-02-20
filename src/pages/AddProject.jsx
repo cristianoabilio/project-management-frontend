@@ -34,7 +34,7 @@ export default function AddProject() {
             navigate('/projects');
         } catch (error) {
             console.log("Error saving project.", error);
-            alert("failed to add project");
+            toast.error('failed to add project');
         } finally {
             setLoading(false);
         }

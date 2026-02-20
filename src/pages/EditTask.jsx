@@ -75,7 +75,7 @@ export default function EditTask() {
             navigate('/tasks');
         } catch (error) {
             console.log("Error saving task.", error);
-            alert("failed to add task");
+            toast.error('Error to update this task');
         } finally {
             setLoading(false);
         }

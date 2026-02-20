@@ -58,7 +58,7 @@ export default function AddTask() {
             navigate('/tasks');
         } catch (error) {
             console.log("Error saving task.", error);
-            alert("failed to add task");
+            toast.error('failed to add a task');
         } finally {
             setLoading(false);
         }
