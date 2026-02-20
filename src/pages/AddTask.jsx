@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../axios";
 import DashboardLayout from "../components/DashboardLayout";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function AddTask() {
     const [projectId, setProjectId] = useState("");
@@ -22,12 +23,7 @@ export default function AddTask() {
                     }
                 });
 
-                console.log(response.data.data);
                 setProjects(response.data.data);
-
-                console.log('Data type:', typeof projects);
-                console.log('Data value:', projects);
-                console.log('Is array:', Array.isArray(projects));
 
             } catch (error) {
                 console.log("error fetching projects.", error);
@@ -58,7 +54,7 @@ export default function AddTask() {
             }
             );
 
-            alert("Task added successfully.");
+            toast.success('Task added successfully.');
             navigate('/tasks');
         } catch (error) {
             console.log("Error saving task.", error);

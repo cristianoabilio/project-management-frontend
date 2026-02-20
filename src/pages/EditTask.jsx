@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../axios";
 import DashboardLayout from "../components/DashboardLayout";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditTask() {
     const {id} = useParams();
@@ -70,7 +71,7 @@ export default function EditTask() {
             }
             );
 
-            alert("Task updated successfully.");
+            toast.success('Task updated successfully.');
             navigate('/tasks');
         } catch (error) {
             console.log("Error saving task.", error);

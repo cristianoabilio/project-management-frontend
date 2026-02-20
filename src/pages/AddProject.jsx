@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../axios";
 import DashboardLayout from "../components/DashboardLayout";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function AddProject() {
     const [title, setTitle] = useState("");
@@ -28,7 +29,8 @@ export default function AddProject() {
             }
             );
 
-            alert("project added successfully.");
+            toast.success('Project added successfully.');
+
             navigate('/projects');
         } catch (error) {
             console.log("Error saving project.", error);
