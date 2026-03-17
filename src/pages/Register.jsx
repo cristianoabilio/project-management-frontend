@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../axios";
+import { registerService } from "../services/authService";
 
 export default function Register() {
     const [name, setName] = useState("");
@@ -18,11 +19,10 @@ export default function Register() {
         setMessage('');
 
         try {
-            const response = await api.post('/register', {
+            const response = await registerService('/register', {
                 name,
                 email,
                 password,
-                password_confirmation
             });
 
             const token = response.data.data.token;
