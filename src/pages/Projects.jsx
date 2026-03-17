@@ -3,7 +3,7 @@ import DashboardLayout from "../components/DashboardLayout";
 import api from "../axios";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { getProjects } from "../services/projectService";
+import { deleteProject, getProjects } from "../services/projectService";
 
 export default function Projects() {
     const [token] = useAuth();
@@ -35,11 +35,7 @@ export default function Projects() {
         try {
             const token = localStorage.getItem('token');
 
-            await api.delete(`/projects/${id}`, {
-                headers : {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
+            await deleteProject(id, token);
 
             // removing project from ui
             setProjects(projects.filter((project) => project.id !== id));
