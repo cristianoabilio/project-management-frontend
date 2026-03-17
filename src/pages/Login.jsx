@@ -2,31 +2,28 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../axios";
+import { useAuth } from "../context/AuthContext";
+import { loginService } from "../services/authService";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [login] = useAuth();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setMessage('');
 
         try {
-            const response = await api.post('/login', {
-                email,
-                password
-            });
+            const response = await loginService({email, password});
 
             const token = response.data.data.token;
-            localStorage.setItem('token', token);
-
-            const user = response.data.data.name;
+            const user = response.data.data;
+            login(token, user);
             console.log("user login", user);
-            localStorage.setItem('user', user);
 
             toast.success(response.data.message);
 
