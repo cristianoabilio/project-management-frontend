@@ -2,30 +2,22 @@ import React, { useEffect, useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
 import api from "../axios";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { getProjects } from "../services/projectService";
 
 export default function Projects() {
+    const [token] = useAuth();
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const token = localStorage.getItem('token');
-                const response = await api.get('/projects', {
-                    headers : {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                const response = await getProjects(token);
 
-                console.log(response.data.data);
                 setProjects(response.data.data);
-
-                console.log('Data type:', typeof projects);
-                console.log('Data value:', projects);
-                console.log('Is array:', Array.isArray(projects));
-
             } catch (error) {
-                console.log("error fetching projects.");
+                console.log("error fetching projects.", error);
             } finally {
                 setLoading(false);
             }
