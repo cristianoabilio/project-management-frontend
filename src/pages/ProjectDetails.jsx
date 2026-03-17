@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
 import { useParams } from "react-router-dom";
-import api from "../axios";
+import { getProjectDetails } from "../services/projectService";
 
 export default function ProjectDetails() {
     const {id} = useParams();
@@ -12,11 +12,7 @@ export default function ProjectDetails() {
         const fetchProject = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await api.get(`/projects/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                const response = await getProjectDetails(id, token);
 
                 setProjectDetails(response.data.data);
                 console.log(projectDetails.tasks);

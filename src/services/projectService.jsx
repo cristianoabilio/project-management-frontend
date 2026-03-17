@@ -29,3 +29,18 @@ export const deleteProject = async (id, token) => {
         console.error("Error deleting project", error);
     }
 }
+
+// project details
+export const getProjectDetails = async (id, token) => {
+    try {
+        const response = await api.get(`/projects/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+        return response;
+    } catch (error) {
+        console.error("Error getting project details", error);
+    }
+}
